@@ -2,15 +2,15 @@ version: "3"
 services:
   db:
     image: mysql:5.7
+    platform: linux/x86_64
     volumes:
       - db-store:/var/lib/mysql
       - ./logs:/var/log/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
       - TZ=${TZ}
     ports:
       - ${DB_PORT}:3306
